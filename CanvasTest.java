@@ -83,19 +83,13 @@ class CanvasTest implements MouseListener, MouseMotionListener, ActionListener, 
 			else if (!(x==0 && y==0) && ss == Selection.RECT_TRACE)
 				g.fillRect(x,y,new Integer(lineThickness.getText()).intValue(),new Integer(lineThickness.getText()).intValue());
 			else if (!(x==0 && y==0) && ss == Selection.STAR_TRACE)
-				//g.fillPolygon(x,y,new Integer(lineThickness.getText()).intValue(),new Integer(lineThickness.getText()).intValue());
-				g.fillOval(x,y,new Integer(lineThickness.getText()).intValue(),new Integer(lineThickness.getText()).intValue());
+				g.fillPolygon(x,y,new Integer(lineThickness.getText()).intValue(),new Integer(lineThickness.getText()).intValue());
+				//If the above does NOT work in Java 8
+				//g.fillOval(x,y,new Integer(lineThickness.getText()).intValue(),new Integer(lineThickness.getText()).intValue());
 			else if (ss == Selection.RECT_CREATE || ss == Selection.CIRC_CREATE || ss == Selection.CLEAR){
 				System.out.println("Let's create!");
 			}
 			if(ss == Selection.RECT_CREATE){
-				/*if(x1>x2 && y2>y1)
-					g.drawRect(x1,y1,x1-x2,y2-y1);
-				else if (x2>x1 && y1>y2)
-					g.drawRect(x1,y1,x2-x1,y1-y2);
-				else if (x1>x2 && y1>y2)
-					g.drawRect(x1,y1,x1-x2,y1-y2);
-				else g.drawRect(x1,y1,x2-x1,y2-y1);*/
 				g.drawRect(x1,y1,x2-x1,y2-y1);
 			}
 			if(ss == Selection.CIRC_CREATE){
@@ -126,8 +120,8 @@ class CanvasTest implements MouseListener, MouseMotionListener, ActionListener, 
 
 		toolbar = new Panel();
 			ss = Selection.OVAL_TRACE;
-			beginSpacer = new Label("Color: ");				toolbar.add(beginSpacer);
-			colorSelection = new Choice();					toolbar.add(colorSelection);
+			beginSpacer = new Label("Color: ");	toolbar.add(beginSpacer);
+			colorSelection = new Choice();		toolbar.add(colorSelection);
 				colorSelection.add( "Red" );
 				colorSelection.add( "Orange" );
 				colorSelection.add( "Yellow" );
@@ -136,16 +130,28 @@ class CanvasTest implements MouseListener, MouseMotionListener, ActionListener, 
 				colorSelection.add( "Other (Color Wheel)" );
 				colorSelection.addItemListener( this );
 				colorChooser = new JColorChooser();
-			lineSpacer = new Label("   Line: ");			toolbar.add(lineSpacer);
-			lineThickness = new TextField("5", 3);			toolbar.add(lineThickness);
-				//lineThickness.addKeyListener( new KeyAdapter(){} );
-			ovalTraceButton = new Button("◯");				toolbar.add(ovalTraceButton);	ovalTraceButton.addActionListener(this);
-			rectTraceButton = new Button("▢");				toolbar.add(rectTraceButton);	rectTraceButton.addActionListener(this);
-			starTraceButton = new Button("☆");				toolbar.add(starTraceButton);	starTraceButton.addActionListener(this);
-			createSpacer = new Label("   Create: ");		toolbar.add(createSpacer);
-			rectCreateButton = new Button("Rectangle");		toolbar.add(rectCreateButton);	rectCreateButton.addActionListener(this);
-			circCreateButton = new Button("Circle");		toolbar.add(circCreateButton);	circCreateButton.addActionListener(this);
-			clearButton = new Button("CLEAR");				toolbar.add(clearButton);		clearButton.addActionListener(this);
+			lineSpacer = new Label("   Line: ");	toolbar.add(lineSpacer);
+			lineThickness = new TextField("5", 3);	toolbar.add(lineThickness);
+			ovalTraceButton = new Button("◯");
+				toolbar.add(ovalTraceButton);
+				ovalTraceButton.addActionListener(this);
+			rectTraceButton = new Button("▢");
+				toolbar.add(rectTraceButton);
+				rectTraceButton.addActionListener(this);
+			starTraceButton = new Button("☆");
+				toolbar.add(starTraceButton);
+				starTraceButton.addActionListener(this);
+			createSpacer = new Label("   Create: ");
+				toolbar.add(createSpacer);
+			rectCreateButton = new Button("Rectangle");
+				toolbar.add(rectCreateButton);
+				rectCreateButton.addActionListener(this);
+			circCreateButton = new Button("Circle");
+				toolbar.add(circCreateButton);
+				circCreateButton.addActionListener(this);
+			clearButton = new Button("CLEAR");
+				toolbar.add(clearButton);
+				clearButton.addActionListener(this);
 		fr.add("North", toolbar);
 
 		fr.setVisible(true);
